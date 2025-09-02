@@ -1,9 +1,6 @@
 env = "dev"
 components = {
-  variable = "components" {
-  default = {
-
-  frontend = {
+    frontend = {
   name    = "frontend"
   vm_size = "Standard_DS1_v2"
   }
