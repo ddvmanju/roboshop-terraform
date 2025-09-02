@@ -1,6 +1,6 @@
 env = "dev"
 components = {
-  variable "components" {
+  variable = "components" {
   default = {
 
   frontend = {
