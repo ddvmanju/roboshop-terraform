@@ -3,7 +3,7 @@ data "azurerm_resource_group" "main" {
 }
 
 data "azurerm_subnet" "example" {
-  name                 = "default"
-  virtual_network_name = "DevOps-AMI-vnet"
+  name                 = "snet-ukwest-1"
+  virtual_network_name = "vnet-ukwest"
   resource_group_name  = data.azurerm_resource_group.main.name
 }
