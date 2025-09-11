@@ -1,16 +1,16 @@
 resource "azurerm_public_ip" "main" {
-  name                = "${var.component}-ip"
+  name                = "${var.component}-${var.env}ip"
   resource_group_name = data.azurerm_resource_group.main.name
   location            = data.azurerm_resource_group.main.location
   allocation_method   = "Static"
 
   tags = {
-    component = var.component
+    component = "${var.component}-${var.env}-ip"
   }
 }
 
 resource "azurerm_network_interface" "main" {
-  name                = "${var.component}-nic"
+  name                = "${var.component}-${var.env}-nic"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
 
@@ -23,7 +23,7 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_network_security_group" "main" {
-  name                = "${var.component}-nsg"
+  name                = "${var.component}-${var.env}-nsg"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
 
@@ -40,12 +40,12 @@ resource "azurerm_network_security_group" "main" {
   }
 
   tags = {
-    component = var.component
+    component = "${var.component}-${var.env}-nsg"
   }
 }
 
 resource "azurerm_dns_a_record" "main" {
-  name                = "${var.component}-dev"
+  name                = "${var.component}-${var.env}"
   zone_name           = "azdevops.online"
   resource_group_name = data.azurerm_resource_group.main.name
   ttl                 = 10
@@ -73,7 +73,7 @@ resource "azurerm_virtual_machine" "main" {
   }
 
     storage_os_disk {
-      name              = var.component
+      name              = "${var.component}-${var.env}"
       caching           = "ReadWrite"
       create_option     = "FromImage"
       managed_disk_type = "Standard_LRS"
